@@ -1,3 +1,15 @@
+/*
+TODO:
+
+4. Erstellen Sie eine Methode area() die den Flacheninhalt des Dreiecks
+zuruckliefert.
+5. Erstellen Sie die Methode toString().
+6. Erstellen Sie eine Methode equals(Object o), mit der Sie Triangle mit
+einem anderen Dreieck vergleichen.
+_____________________________________________________________________________
+*/
+
+
 public class Triangle{
   private Point a,b,c;
 	
