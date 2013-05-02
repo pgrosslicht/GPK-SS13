@@ -3,9 +3,10 @@ TODO:
 
 4. Erstellen Sie eine Methode area() die den Flacheninhalt des Dreiecks
 zuruckliefert.
-5. Erstellen Sie die Methode toString().
-6. Erstellen Sie eine Methode equals(Object o), mit der Sie Triangle mit
-einem anderen Dreieck vergleichen.
+
+Kontrolliert von:
+Mike: -
+Patrick: -
 _____________________________________________________________________________
 */
 
@@ -26,4 +27,19 @@ public class Triangle{
 	public Triangle midTriangle(){
 		return new Triangle(a.middle(b), b.middle(c), c.middle(a));
 	}
+	
+	@Override
+	public String toString() {
+		return a.toString() + " " + b.toString() + " " +c.toString();
+	}
+	
+	@Override
+	public boolean equals(Object object) {
+		return object != null &&
+			this.getClass() == object.getClass() &&
+			a.equals(((Triangle) object).a) &&
+			b.equals(((Triangle) object).b) &&
+			c.equals(((Triangle) object).c);
+	}
+
 }

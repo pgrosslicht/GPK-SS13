@@ -1,12 +1,11 @@
 ﻿/*
 TO DO:
 
-4. Erstellen Sie die Methode toString(). Sie konnen dabei selbst das Ausgabeformat
-wahlen.
-5. Erstellen Sie eine Methode equals(Object o), mit der Sie Point mit
-einem anderen Punkt vergleichen. Sie konnen sich aussuchen, ob Sie
-equals mit instanceof oder getClass() implementieren, achten Sie aber
-darauf, dass equals(null) immer false zuruckliefern muss.
+[]
+
+Kontrolliert von:
+Mike: 130502 1025
+Patrick: -
 __________________________________________________________________________________
 */
 
@@ -37,4 +36,18 @@ public class Point{
 		return new Point(x,y);
 		
 	}
+	
+	@Override
+	public String toString() {
+	 	return "(" + x + ", " + y + ")"; 
+	}
+	 
+	@Override
+	public boolean equals(Object object) {
+	 	return object != null && 
+	 		this.getClass() == object.getClass() &&
+	 		this.x == ((Point) object).x &&
+	 		this.y ==((Point) object).y;
+	 }
+	 
 }
