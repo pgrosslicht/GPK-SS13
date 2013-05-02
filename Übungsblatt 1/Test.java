@@ -1,2 +1,1 @@
-//testdatei damit ich das System verstehe
-//Edit test
+LÖSCH DIE DRECKS DATEI! :D
