@@ -1,10 +1,10 @@
-/*
+/* PK Uebung 1
  * TODO:
  * 
  * []
  * 
  * Kontrolliert von:
- * Mike: 130502 1039
+ * Mike: 130503 1010
  * Patrick: 130502 1151
  */
 package uebungsblatt1;
@@ -28,7 +28,7 @@ public class Triangle {
   
   public double area() {
     double s;
-    s = this.a.dist(b) + this.b.dist(c) + this.c.dist(a);
+    s = (this.a.dist(b) + this.b.dist(c) + this.c.dist(a))/2;
     return Math.sqrt(s * (s - this.a.dist(b)) * (s - this.b.dist(c)) * (s - this.c.dist(a)));
   }
   
