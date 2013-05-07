@@ -8,7 +8,7 @@
  * Patrick: 
  */
 
-public class Point implements Scaleable, Moveable, Rotate {
+public class Point implements Scaleable, Moveable, Rotate, Transformable {
   private double x, y;
 
   public Point(double a, double b) {
@@ -39,6 +39,15 @@ public class Point implements Scaleable, Moveable, Rotate {
     this.y = this.y * sy;
   }
 
+  /** skaliert einen Punkt auf der x-Achse um den Faktor sx, auf der y-Achse um den Faktor sy und gibt einen neuen Punkt mit diesen Eigenschaften zurueck.
+   * @param sx Faktor um den die x-Achse skaliert werden soll
+   * @param sy Faktor um den die y-Achse skaliert werden soll
+   * @return skalierter Punkt
+   */
+  public Point scale2(double sx, double sy) {
+    return new Point(this.x * sx, this.y * sy);
+  }
+
   /**
    * verschiebt den Punkt um den Vektor (tx, ty)
    * @param tx x-Koordinate des Vektors
@@ -47,6 +56,16 @@ public class Point implements Scaleable, Moveable, Rotate {
   public void move(double tx, double ty) {
     this.x = this.x + tx;
     this.y = this.y + ty;
+  }
+
+  /**
+   * verschiebt den Punkt um den Vektor (tx, ty) und gibt einen neuen Punkt mit diesen Eigenschaften zurueck
+   * @param tx x-Koordinate des Vektors
+   * @param ty y-Koordinate des Vektors
+   * @return verschobener Punkt
+   */
+  public Point move2(double tx, double ty) {
+    return new Point(this.x + tx, this.y + ty);
   }
 
   /**
@@ -59,6 +78,18 @@ public class Point implements Scaleable, Moveable, Rotate {
     double y = - (this.x * Math.sin(alpha)) + this.y * Math.cos(alpha);
     this.x = x;
     this.y = y;
+  }
+
+  /**
+   * dreht den Punkt um alpha Grad relativ zum Ursprung und gibt einen neuen Punkt mit diesen Eigenschaften zurueck.
+   * @param alpha Winkel (in Grad) um den gedreht werden soll
+   * @return gedrehter Punkt
+   */
+  public Point rotate2(double alpha) {
+    alpha = Math.toRadians(alpha);
+    double x = this.x * Math.cos(alpha) + this.y * Math.sin(alpha);
+    double y = - (this.x * Math.sin(alpha)) + this.y * Math.cos(alpha);
+    return new Point(x, y);
   }
 
   @Override
