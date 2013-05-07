@@ -8,9 +8,9 @@
  * Patrick: 
  */
 
-public interface Shapeable {
+public interface Scaleable {
   /**
    * skaliert Objekte um sx bzw. sy
    */
-  void scale(double sx, double xy);
+  void scale(double sx, double sy);
 } 
