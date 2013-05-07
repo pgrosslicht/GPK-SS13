@@ -1,14 +1,14 @@
 /* PK Uebung 2
  * TO DO:
  *
- * Interfaces implementieren
+ * []
  *
  * Kontrolliert von:
  * Mike: 
  * Patrick: 
  */
 
-public class Point {
+public class Point implements Scaleable, Moveable, Rotate {
   private double x, y;
 
   public Point(double a, double b) {
@@ -28,6 +28,37 @@ public class Point {
     double y = 0.5 * (this.y + p.y);
 
     return new Point(x, y);
+  }
+
+  /** skaliert einen Punkt auf der x-Achse um den Faktor sx, auf der y-Achse um den Faktor sy
+   * @param sx Faktor um den die x-Achse skaliert werden soll
+   * @param sy Faktor um den die y-Achse skaliert werden soll
+   */
+  public void scale(double sx, double sy) {
+    this.x = this.x * sx;
+    this.y = this.y * sy;
+  }
+
+  /**
+   * verschiebt den Punkt um den Vektor (tx, ty)
+   * @param tx x-Koordinate des Vektors
+   * @param ty y-Koordinate des Vektors
+   */
+  public void move(double tx, double ty) {
+    this.x = this.x + tx;
+    this.y = this.y + ty;
+  }
+
+  /**
+   * dreht den Punkt um alpha Grad relativ zum Ursprung
+   * @param alpha Winkel (in Grad) um den gedreht werden soll
+   */
+  public void rotate(double alpha) {
+    alpha = Math.toRadians(alpha);
+    double x = this.x * Math.cos(alpha) + this.y * Math.sin(alpha);
+    double y = - (this.x * Math.sin(alpha)) + this.y * Math.cos(alpha);
+    this.x = x;
+    this.y = y;
   }
 
   @Override
