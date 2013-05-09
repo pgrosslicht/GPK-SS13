@@ -70,7 +70,6 @@ public class Triangle implements Shape, Scaleable, Moveable, Rotate, Transformab
    * @param ty y-Koordinate des Vektors
    */
   public void move(double tx, double ty) {
-    return new Triangle(this.a.move2(tx, ty), this.b.move2(tx, ty), this.c.move2(tx, ty));
     this.a.move(tx, ty);
     this.b.move(tx, ty);
     this.c.move(tx, ty);
