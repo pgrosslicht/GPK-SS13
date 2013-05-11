@@ -19,7 +19,11 @@ public class Testprog {
     Point y = new Point(-1.0, 3.0);
     Point z = new Point(2.0, -1.0);
     Triangle dreieck = new Triangle(x, y, z);
-
+    Triangle dreieck2 = new Triangle(x, y, z);
+    
+    System.out.println("");
+    System.out.println("PK Uebung 2 (Patrick Grosslicht, Michael Hambrusch)");
+    System.out.println("");
     System.out.println("Dreieck das veraendert wird:");
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
     System.out.println("Dreieck rotate");
@@ -31,12 +35,13 @@ public class Testprog {
     System.out.println("Dreieck scale"); //scale
     dreieck.scale(5,8);
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
+    System.out.println("");
 
     System.out.println("Dreieck das gleich bleibt:");
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
     System.out.println("Dreieck rotate2");
-    dreieck.rotate2(5); //rotate2
-    System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
+    dreieck2 = dreieck.rotate2(5); //rotate2
+    System.out.println("Dreieck: " + dreieck2.toString()); //Dreieck Koords
     System.out.println("Dreieck move2");
     dreieck.move2(3,2); //move2
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords

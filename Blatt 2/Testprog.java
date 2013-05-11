@@ -1,12 +1,11 @@
 /* PK Uebung 2
  * TODO:
  * 
- * [irgendwie check ich das nicht.]
- * error: Class names, 'Testprog', are only accepted if annotation processing is explicitly requested
- * 1 error
  *
  * benutzt du 'javac Testprog.java'? Der Fehler kommt eigentlich nur, wenn du das .java vergisst.
  * Hab das Programm mal bisschen gefixt (du kannst dreieck.move und dergleichen nicht in println benutzen, da das void zurückgibt), bei mir  laeufts jetzt.
+ *
+ * habe rotate2 an dreieck2 gelegt, damit man zeigen kann, dass rotate2 funktioniert
  *
  * Kontrolliert von:
  * Mike: 
@@ -19,6 +18,7 @@ public class Testprog {
     Point y = new Point(-1.0, 3.0);
     Point z = new Point(2.0, -1.0);
     Triangle dreieck = new Triangle(x, y, z);
+    Triangle dreieck2 = new Triangle(x, y, z);
     
     System.out.println("");
     System.out.println("PK Uebung 2 (Patrick Grosslicht, Michael Hambrusch)");
@@ -39,8 +39,8 @@ public class Testprog {
     System.out.println("Dreieck das gleich bleibt:");
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
     System.out.println("Dreieck rotate2");
-    dreieck.rotate2(5); //rotate2
-    System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
+    dreieck2 = dreieck.rotate2(5); //rotate2
+    System.out.println("Dreieck: " + dreieck2.toString()); //Dreieck Koords
     System.out.println("Dreieck move2");
     dreieck.move2(3,2); //move2
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
