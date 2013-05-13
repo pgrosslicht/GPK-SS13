@@ -40,7 +40,7 @@ public class Testprog {
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
     System.out.println("Dreieck rotate2");
     dreieck2 = dreieck.rotate2(5); //rotate2
-    System.out.println("Dreieck: " + dreieck2.toString()); //Dreieck Koords
+    System.out.println("Dreieck2: " + dreieck2.toString()); //Dreieck Koords
     System.out.println("Dreieck move2");
     dreieck.move2(3,2); //move2
     System.out.println("Dreieck: " + dreieck.toString()); //Dreieck Koords
