@@ -3,6 +3,11 @@
 *
 * [nicht getestet]
 *
+* wenn ich das richtig seh, funktioniert size() nicht, da sich das rekursiv selbst aufruft.
+* auch glaub ich, dass wir nicht einfach MyList(index) machen kÃ¶nnen, wir mÃ¼ssen das ja alles selbst programmieren...
+* dadurch gehen auch alle anderen Funktionen nicht. Schau dir das mal im Buch ab Seite 252 an
+*   - Patrick
+*
 * Kontrolliert von:
 * Mike:
 * Patrick:
@@ -26,32 +31,32 @@ public class MyList<A> {
 	}
 	
 	/**
-	* @return gibt Anzahl der Elemente der Liste als int zurück
+	* @return gibt Anzahl der Elemente der Liste als int zurÃ¼ck
 	*/
 	public int size() {
-		int listCount = Mylist.size();
+		int listCount = MyList.size();
 		return listCount;
 	}
 	
 	/**
-	* gibt Element der Liste vom Index zurück
+	* gibt Element der Liste vom Index zurÃ¼ck
 	*/
 	public A get(int index) {
 		return MyList(index);
 	}
 	
 	/**
-	* fügt Element n am Listenanfang hinzu
+	* fÃ¼gt Element n am Listenanfang hinzu
 	*/
 	public void addFirst(A n) {
-		MyList.add(n);  
+		MyList.add(n);
 	}	
 	
 	/**
-	* gibt das erste Element zurück und löscht es danach
+	* gibt das erste Element zurÃ¼ck und lÃ¶scht es danach
 	*/
 	public A removeFirst(){
-		private double oldfirst = MyList.get(0);
+		double oldfirst = MyList.get(0);
 		MyList.remove(0);
 		return oldfirst;
 	}
