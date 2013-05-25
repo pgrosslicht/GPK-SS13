@@ -14,7 +14,7 @@
 * Patrick:
 */
 
-public class MyList<A> {
+public class MyList<A> implements QueueI<A> {
   private Node<A> head = null;
   private int size = 0;
 
@@ -108,6 +108,20 @@ public class MyList<A> {
   }
 
   /**
+   * fügt ein Element zur Queue
+   */
+  public void enqueue(A n) {
+    this.addFirst(n);
+  }
+
+  /**
+   * entfernt das erste Element aus der Queue
+   */
+  public A dequeue() {
+   return this.removeLast();
+  }
+
+  /**
    * nur zum Testen
    */
   public void printList() {
@@ -135,5 +149,12 @@ public class MyList<A> {
     System.out.println(test.removeLast()); /* entfernt 3 aus Liste, sollte 3 ausgeben, Inhalt der Liste: 7, 5 */
     test.printList();
     System.out.println(test.size()); /* Groesse sollte jetzt 2 sein */
+
+    MyList<Integer> queue_test = new MyList<Integer>();
+    queue_test.enqueue(4);
+    queue_test.enqueue(5);
+    System.out.println(queue_test.dequeue()); /* sollte 4 ausgeben */
+    System.out.println(queue_test.dequeue()); /* sollte 5 ausgeben */
+    // System.out.println(queue_test.dequeue()); /* sollte eine NullPointerException werfen */
   }
 }
