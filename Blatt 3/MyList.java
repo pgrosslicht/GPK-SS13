@@ -39,6 +39,7 @@ public class MyList<A> implements QueueI<A> {
     return size;
   }
 
+
   /**
   * gibt Element der Liste vom Index zurück
   */
@@ -136,7 +137,7 @@ public class MyList<A> implements QueueI<A> {
   /**
    * nur zum Testen
    */
-  public static void main(String[] args) {
+  public static void main2(String[] args) {
     MyList<Integer> test = new MyList<Integer>(); /* neue Liste mit Integers initialisieren */
     test.addFirst(5); /* 5 hinzufuegen, Inhalt der Liste: 5 */
     test.addFirst(7); /* 7 hinzufuegen, Inhalt der Liste: 7, 5 */
