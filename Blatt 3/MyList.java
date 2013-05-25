@@ -2,14 +2,13 @@
 * TODO:
 *
 * Fehlerbehandlung
-* removeLast()
 *
 * wenn ich das richtig seh, funktioniert size() nicht, da sich das rekursiv selbst aufruft.
 * auch glaub ich, dass wir nicht einfach MyList(index) machen können, wir müssen das ja alles selbst programmieren...
 * dadurch gehen auch alle anderen Funktionen nicht. Schau dir das mal im Buch ab Seite 252 an
 *   - Patrick
 *
-* hab mal das Grundgeruest gemacht, rest sollte mithilfe von get(), addFirst() und removeFirst() nicht soo schwer sein.
+* hab mal das Grundgeruest gemacht, Rest sollte mithilfe von get(), addFirst() und removeFirst() nicht soo schwer sein.
 *
 * Kontrolliert von:
 * Mike:
@@ -84,6 +83,32 @@ public class MyList<A> {
   }
 
   /**
+   * gibt das letzte Element zurück und löscht es danach
+   */
+  public A removeLast(){
+    Node<A> temp = head;
+    for (int i = 0; i < this.size()-1; i++) {
+      temp = temp.next;
+    }
+    A value = temp.val;
+    temp = null;
+    size--;
+    return value;
+  }
+
+  /**
+   * nur zum Testen
+   */
+  public void printList() {
+    Node<A> temp = head;
+    for (int i = 0; i < this.size(); i++) {
+      System.out.print(temp.val + ", ");
+      temp = temp.next;
+    }
+    System.out.println();
+  }
+
+  /**
    * nur zum Testen
    */
   public static void main(String[] args) {
@@ -93,11 +118,11 @@ public class MyList<A> {
     test.addFirst(9); /* 9 hinzufuegen, Inhalt der Liste: 9, 7, 5 */
     test.addLast(3); /* 3 am Ende hinzufuegen, Inhalt der Liste: 9, 7, 5, 3 */
     System.out.println(test.size()); /* Groesse sollte jetzt 4 sein */
-    System.out.println(test.get(0)); /* sollte 9 ausgeben */
-    System.out.println(test.get(1)); /* sollte 7 ausgeben */
-    System.out.println(test.get(2)); /* sollte 5 ausgeben */
+    test.printList();
     System.out.println(test.removeFirst()); /* entfernt 9 aus Liste, sollte 9 ausgeben, Inhalt der Liste: 7, 5, 3 */
-    System.out.println(test.get(2)); /* sollte 3 ausgeben */
-    System.out.println(test.size()); /* Groesse sollte jetzt 3 sein */
+    test.printList();
+    System.out.println(test.removeLast()); /* entfernt 3 aus Liste, sollte 3 ausgeben, Inhalt der Liste: 7, 5 */
+    test.printList();
+    System.out.println(test.size()); /* Groesse sollte jetzt 2 sein */
   }
 }
