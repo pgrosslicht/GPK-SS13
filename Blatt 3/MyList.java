@@ -1,7 +1,6 @@
 /* PK Uebung 3
 * TODO:
 *
-* Fehlerbehandlung
 *
 * wenn ich das richtig seh, funktioniert size() nicht, da sich das rekursiv selbst aufruft.
 * auch glaub ich, dass wir nicht einfach MyList(index) machen können, wir müssen das ja alles selbst programmieren...
@@ -44,11 +43,15 @@ public class MyList<A> {
   * gibt Element der Liste vom Index zurück
   */
   public A get(int index) {
-    Node<A> element = head;
-    for (int i = 0; i<index; i++) {
-      element = element.next;
+    if (size <= index || index < 0) {
+      throw new IndexOutOfBoundsException();
+    } else {
+      Node<A> element = head;
+      for (int i = 0; i<index; i++) {
+        element = element.next;
+      }
+      return element.val;
     }
-    return element.val;
   }
 
   /**
@@ -63,10 +66,14 @@ public class MyList<A> {
   * gibt das erste Element zurück und löscht es danach
   */
   public A removeFirst(){
-    A element = head.val;
-    head = head.next;
-    size--;
-    return element;
+    if (size == 0) {
+      throw new NullPointerException();
+    } else {
+      A element = head.val;
+      head = head.next;
+      size--;
+      return element;
+    }
   }
 
   /**
@@ -86,14 +93,18 @@ public class MyList<A> {
    * gibt das letzte Element zurück und löscht es danach
    */
   public A removeLast(){
-    Node<A> temp = head;
-    for (int i = 0; i < this.size()-1; i++) {
-      temp = temp.next;
+    if (size == 0) {
+      throw new NullPointerException();
+    } else {
+      Node<A> temp = head;
+      for (int i = 0; i < this.size()-1; i++) {
+        temp = temp.next;
+      }
+      A value = temp.val;
+      temp = null;
+      size--;
+      return value;
     }
-    A value = temp.val;
-    temp = null;
-    size--;
-    return value;
   }
 
   /**
