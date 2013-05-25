@@ -2,7 +2,7 @@
 * TODO:
 *
 * Fehlerbehandlung
-* addLast() und removeLast()
+* removeLast()
 *
 * wenn ich das richtig seh, funktioniert size() nicht, da sich das rekursiv selbst aufruft.
 * auch glaub ich, dass wir nicht einfach MyList(index) machen können, wir müssen das ja alles selbst programmieren...
@@ -17,58 +17,71 @@
 */
 
 public class MyList<A> {
-	private Node<A> head = null;
+  private Node<A> head = null;
   private int size = 0;
-	
-	public boolean isEmpty() {
-		return head == null;
-	}
-	
-	private class Node<A> {
-		private A val;
-		private Node<A> next = null;
-		
-		Node(A v, Node<A> l) {
-			val = v;
-			next = l;
-		}
-	}
-	
-	/**
-	* @return gibt Anzahl der Elemente der Liste als int zurück
-	*/
-	public int size() {
-		return size;
-	}
-	
-	/**
-	* gibt Element der Liste vom Index zurück
-	*/
-	public A get(int index) {
+
+  public boolean isEmpty() {
+    return head == null;
+  }
+
+  private class Node<A> {
+    private A val;
+    private Node<A> next = null;
+
+    Node(A v, Node<A> l) {
+      val = v;
+      next = l;
+    }
+  }
+
+  /**
+  * @return gibt Anzahl der Elemente der Liste als int zurück
+  */
+  public int size() {
+    return size;
+  }
+
+  /**
+  * gibt Element der Liste vom Index zurück
+  */
+  public A get(int index) {
     Node<A> element = head;
     for (int i = 0; i<index; i++) {
       element = element.next;
     }
     return element.val;
-	}
-	
-	/**
-	* fügt Element n am Listenanfang hinzu
-	*/
-	public void addFirst(A n) {
+  }
+
+  /**
+  * fügt Element n am Listenanfang hinzu
+  */
+  public void addFirst(A n) {
     this.head = new Node<A>(n, this.head);
     size++;
-	}	
-	
-	/**
-	* gibt das erste Element zurück und löscht es danach
-	*/
-	public A removeFirst(){
+  } 
+  
+  /**
+  * gibt das erste Element zurück und löscht es danach
+  */
+  public A removeFirst(){
     A element = head.val;
     head = head.next;
     size--;
     return element;
-	}
+  }
+
+  /**
+   * fügt Element n am Listenende hinzu
+   */
+  public void addLast(A n) {
+    Node<A> temp = head;
+
+    for (int i=0; i < this.size()-1; i++) {
+      temp = temp.next;
+    }
+    temp.next = new Node<A>(n, null);
+    size++;
+  }
 
   /**
    * nur zum Testen
@@ -78,11 +91,13 @@ public class MyList<A> {
     test.addFirst(5); /* 5 hinzufuegen, Inhalt der Liste: 5 */
     test.addFirst(7); /* 7 hinzufuegen, Inhalt der Liste: 7, 5 */
     test.addFirst(9); /* 9 hinzufuegen, Inhalt der Liste: 9, 7, 5 */
-    System.out.println(test.size()); /* Groesse sollte jetzt 3 sein */
+    test.addLast(3); /* 3 am Ende hinzufuegen, Inhalt der Liste: 9, 7, 5, 3 */
+    System.out.println(test.size()); /* Groesse sollte jetzt 4 sein */
     System.out.println(test.get(0)); /* sollte 9 ausgeben */
     System.out.println(test.get(1)); /* sollte 7 ausgeben */
     System.out.println(test.get(2)); /* sollte 5 ausgeben */
-    System.out.println(test.removeFirst()); /* entfernt 9 aus Liste, sollte 9 ausgeben, Inhalt der Liste: 7, 5 */
-    System.out.println(test.size()); /* Groesse sollte jetzt 2 sein */
+    System.out.println(test.removeFirst()); /* entfernt 9 aus Liste, sollte 9 ausgeben, Inhalt der Liste: 7, 5, 3 */
+    System.out.println(test.get(2)); /* sollte 3 ausgeben */
+    System.out.println(test.size()); /* Groesse sollte jetzt 3 sein */
   }
 }
