@@ -2,13 +2,6 @@
 * TODO:
 *
 *
-* wenn ich das richtig seh, funktioniert this.size() nicht, da sich das rekursiv selbst aufruft.
-* auch glaub ich, dass wir nicht einfach MyList(index) machen können, wir müssen das ja alles selbst programmieren...
-* dadurch gehen auch alle anderen Funktionen nicht. Schau dir das mal im Buch ab Seite 252 an
-*   - Patrick
-*
-* hab mal das Grundgeruest gemacht, Rest sollte mithilfe von get(), addFirst() und removeFirst() nicht soo schwer sein.
-*
 * Kontrolliert von:
 * Mike:
 * Patrick:
