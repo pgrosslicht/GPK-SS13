@@ -2,7 +2,7 @@
 * TODO:
 *
 *
-* wenn ich das richtig seh, funktioniert size() nicht, da sich das rekursiv selbst aufruft.
+* wenn ich das richtig seh, funktioniert this.size() nicht, da sich das rekursiv selbst aufruft.
 * auch glaub ich, dass wir nicht einfach MyList(index) machen können, wir müssen das ja alles selbst programmieren...
 * dadurch gehen auch alle anderen Funktionen nicht. Schau dir das mal im Buch ab Seite 252 an
 *   - Patrick
@@ -36,7 +36,7 @@ public class MyList<A> implements QueueI<A> {
   * @return gibt Anzahl der Elemente der Liste als int zurück
   */
   public int size() {
-    return size;
+    return this.size;
   }
 
 
@@ -44,7 +44,7 @@ public class MyList<A> implements QueueI<A> {
   * gibt Element der Liste vom Index zurück
   */
   public A get(int index) {
-    if (size <= index || index < 0) {
+    if (this.size <= index || index < 0) {
       throw new IndexOutOfBoundsException();
     } else {
       Node<A> element = head;
@@ -60,19 +60,19 @@ public class MyList<A> implements QueueI<A> {
   */
   public void addFirst(A n) {
     this.head = new Node<A>(n, this.head);
-    size++;
+    this.size++;
   } 
   
   /**
   * gibt das erste Element zurück und löscht es danach
   */
   public A removeFirst(){
-    if (size == 0) {
+    if (this.size == 0) {
       throw new NullPointerException();
     } else {
       A element = head.val;
       head = head.next;
-      size--;
+      this.size--;
       return element;
     }
   }
@@ -87,14 +87,14 @@ public class MyList<A> implements QueueI<A> {
       temp = temp.next;
     }
     temp.next = new Node<A>(n, null);
-    size++;
+    this.size++;
   }
 
   /**
    * gibt das letzte Element zurück und löscht es danach
    */
   public A removeLast(){
-    if (size == 0) {
+    if (this.size == 0) {
       throw new NullPointerException();
     } else {
       Node<A> temp = head;
@@ -103,7 +103,7 @@ public class MyList<A> implements QueueI<A> {
       }
       A value = temp.val;
       temp = null;
-      size--;
+      this.size--;
       return value;
     }
   }
