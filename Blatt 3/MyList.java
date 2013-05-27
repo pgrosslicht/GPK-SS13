@@ -44,7 +44,7 @@ public class MyList<A> implements QueueI<A> {
   * gibt Element der Liste vom Index zurück
   */
   public A get(int index) {
-    if (this.size <= index || index < 0) {
+    if (this.size() <= index || index < 0) {
       throw new IndexOutOfBoundsException();
     } else {
       Node<A> element = head;
@@ -94,9 +94,12 @@ public class MyList<A> implements QueueI<A> {
    * gibt das letzte Element zurück und löscht es danach
    */
   public A removeLast(){
-    if (this.size == 0) {
+    if (this.size() == 0) {
       throw new NullPointerException();
     } else {
+      if (this.size() == 1) {
+        return this.removeFirst();
+      }
       Node<A> temp = head;
       for (int i = 0; i < this.size()-1; i++) {
         temp = temp.next;
