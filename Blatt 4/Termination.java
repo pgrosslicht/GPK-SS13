@@ -1,8 +1,15 @@
 public class Termination {
 
   public static boolean isLeapYear(int year) {
-    // true, wenn year ein Schaltjahr ist, sonst false.
-    return true;
+    if (year % 400 == 0) {
+      return true;
+    } else if (year % 100 == 0) {
+      return false;
+    } else if (year % 4 == 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
   public static int year (int days) {
     // Gibt die aktuelle Jahreszahl zurueck, wenn
