@@ -1,0 +1,4 @@
+isLeapYear != IsLeapYear //Rechtschreibfehler
+Terminiert nicht für 366:
+	while gibt true, if(IsLeapYear) gibt true, aber if(days > 366) gibt false
+	daher werden days nicht erniedrigt, year nicht erhöht, aber while gibt immer wieder true zurück
