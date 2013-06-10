@@ -3,12 +3,17 @@ public class BubbleSort {
 	public void sort(String[] array) {
 		boolean unsortiert = true;
 		String temp;
-		int counter = 0;
+		int countervertauscht = 0;
+		int counterdurchlauf = 0;
+		int laufzeit = 0;
 		while (unsortiert) {
+			counterdurchlauf++;
 			unsortiert = false;
 			for (int i = 0; i < array.length-1; i++) {
+				laufzeit++;
 				if (array[i].compareTo(array[i+1]) > 0) {
-          System.out.println("vertausche " + array[i] + " mit " + array[i+1]);
+					countervertauscht++;
+					//  System.out.println("vertausche " + array[i] + " mit " + array[i+1]);
 					temp = array[i];
 					array[i] = array[i+1];
 					array[i+1] = temp;
@@ -16,7 +21,7 @@ public class BubbleSort {
 				}
 			}
 		}
-		System.out.println(counter);
+		// System.out.println("Laufzeit: " + laufzeit + " Vertauscht: " + countervertauscht + " Durchlauf: "+ counterdurchlauf);
 	}
 	
 	public static void main(String[] args) {
@@ -38,7 +43,7 @@ public class BubbleSort {
 		String[] test3 = {"a", "b", "c", "d"};
 		bs3.sort(test3);
 		for (int i = 0; i < test3.length; i++) {
-			System.out.print(test3[i]);
+		System.out.print(test3[i]);
 		} */
 		System.out.println("\nBest case: ");
 		BubbleSort bs4 = new BubbleSort();
@@ -49,7 +54,7 @@ public class BubbleSort {
 		}
 		System.out.println("\nWorst case: ");
 		BubbleSort bs5 = new BubbleSort();
-		String[] test5 = {"f", "e", "d", "c", "b", "a"};
+		String[] test5 = { "d", "c", "b", "a"};
 		bs5.sort(test5);
 		for (int i = 0; i < test5.length; i++) {
 			System.out.print(test5[i]);
