@@ -5,10 +5,10 @@ public class BubbleSort {
 		String temp;
 		int counter = 0;
 		while (unsortiert) {
+			unsortiert = false;
 			for (int i = 0; i < array.length-1; i++) {
-				unsortiert = false;
-				if (array[i] > array[i+1]) {
-					counter++;
+				if (array[i].compareTo(array[i+1]) > 0) {
+          System.out.println("vertausche " + array[i] + " mit " + array[i+1]);
 					temp = array[i];
 					array[i] = array[i+1];
 					array[i+1] = temp;
