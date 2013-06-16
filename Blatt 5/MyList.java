@@ -41,7 +41,7 @@ public class MyList<A> implements Iterable<A> {
         }
         
         public static void main(String[] args) {
-		MyList<String> test = new MyList<String>(); // neue Liste
+		MyList<Integer> test = new MyList<Integer>(); // neue Liste
 		test.add(0); //fügt 0 hinzu
 		test.add(1); //fügt 1 hinzu
 		test.add(2); //fügt 2 hinzu
@@ -49,14 +49,15 @@ public class MyList<A> implements Iterable<A> {
 		test.add(4); //fügt 4 hinzu
 		test.add(5); //fügt 5 hinzu
 		test.add(6); //fügt 6 hinzu
+    MyList.MyListIterator test2 = test.iterator();
 		System.out.println(test.head.value); //sollte null ausgeben
-		System.out.println(test.hasNext()); //sollte true ausgeben
-		System.out.println(test.next()); //sollte 0 ausgeben
-		System.out.println(test.next()); //sollte 1 ausgeben
+		System.out.println(test2.hasNext()); //sollte true ausgeben
+		System.out.println(test2.next()); //sollte 0 ausgeben
+		System.out.println(test2.next()); //sollte 1 ausgeben
 		System.out.println(test.head.value); //sollte 1 ausgeben
-		System.out.println(test.remove()); //sollte 1 removen
+		test2.remove(); //sollte 1 removen
 		System.out.println(test.head.value); //sollte null ausgeben (weil 1 removed wurde)
-		System.out.println(test.next()); //sollte 2 ausgeben
+		System.out.println(test2.next()); //sollte 2 ausgeben
 		System.out.println(test.head.value); //sollte 2 ausgeben
         }
 }
