@@ -1,21 +1,19 @@
 import java.util.Iterator;
 
 public class MyStringArrayIterator implements Iterator<String> {
-
-  // TODO Aufgabe 1.1
+  private String[] theArray;
+  private int index = 0;
 
   public MyStringArrayIterator(String[] array) {
-    // TODO Aufgabe 1.1
+    this.theArray = array;
   }
 
   public boolean hasNext() {
-    // TODO Aufgabe 1.1
-    return false;
+    return index < this.theArray.length;
   }
 
   public String next() {
-    // TODO Aufgabe 1.1
-    return "";
+    return theArray[index++];
   }
 
   public void remove() {
