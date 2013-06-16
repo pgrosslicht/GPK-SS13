@@ -25,7 +25,7 @@ public class MyList<A> implements Iterable<A> {
     }
     
     public boolean hasNext() {
-      return head != null;
+      return head.next != null;
     }
     
     public A next() {
