@@ -21,7 +21,7 @@ public class MyList<A> implements Iterable<A> {
     }
     
     public void remove() {
-      
+      head = head.next;
     }
     
     public boolean hasNext() {
