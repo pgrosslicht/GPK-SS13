@@ -1,4 +1,6 @@
-public class MyList<A> {
+import java.util.*;
+
+public class MyList<A> implements Iterable<A> {
   private class Node {
     A value;
     Node next;
@@ -6,6 +8,28 @@ public class MyList<A> {
     Node(A value, Node next) {
       this.value = value;
       this.next = next;
+    }
+  }
+
+  public MyListIterator<A> iterator() {
+    return new MyListIterator();
+  }
+
+  private class MyListIterator<A> implements Iterator<A> {
+    public MyListIterator() {
+    
+    }
+
+    public void remove() {
+    
+    }
+
+    public boolean hasNext() {
+      return false;
+    }
+
+    public A next() {
+      return null;
     }
   }
 
