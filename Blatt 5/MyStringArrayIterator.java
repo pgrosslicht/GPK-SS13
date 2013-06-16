@@ -47,7 +47,7 @@ public class MyStringArrayIterator implements Iterator<String> {
 		System.out.println("\nArray absolut ausgegeben: ");
 		System.out.println(test2.theArray[0]);	//Test0
 		System.out.println(test2.theArray[1]);	//Test1
-		System.out.println(test2.theArray[2]);	//Test2
+		System.out.println(test2.theArray[2]);	//Test3
 		System.out.println(test2.theArray[3]);	//Test4
 		System.out.println(test2.theArray[4]);	//Test5
 	}
