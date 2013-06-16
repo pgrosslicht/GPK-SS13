@@ -11,11 +11,11 @@ public class MyList<A> implements Iterable<A> {
     }
   }
   
-  public MyListIterator<A> iterator() {
+  public MyListIterator iterator() {
     return new MyListIterator();
   }
   
-  private class MyListIterator<A> implements Iterator<A> {
+  private class MyListIterator implements Iterator<A> {
     public MyListIterator() {
       
     }
@@ -29,7 +29,8 @@ public class MyList<A> implements Iterable<A> {
     }
     
     public A next() {
-      return null;
+      head = head.next;
+      return head.value;
     }
   }
   
