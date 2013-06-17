@@ -17,16 +17,16 @@ public class MyList<A> implements Iterable<A> {
         
         private class MyListIterator implements Iterator<A> {
                 public void remove() {
-                        head = head.next;
+                        MyList.this.head = MyList.this.head.next;
                 }
                 
                 public boolean hasNext() {
-                        return head.next != null;
+                        return MyList.this.head.next != null;
                 }
                 
                 public A next() {
-                        head = head.next;
-                        return head.value;
+                        MyList.this.head = MyList.this.head.next;
+                        return MyList.this.head.value;
                 }
         }
         
