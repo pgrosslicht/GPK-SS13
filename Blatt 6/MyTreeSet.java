@@ -124,8 +124,10 @@ public class MyTreeSet<A extends Comparable<A>> {
   }
 
   public boolean remove(A a) {
-    size--;
-    return root.remove(a);
+    boolean remove = root.remove(a);
+    if (remove)
+      size--;
+    return remove;
   }
 
   public String toString() {
@@ -151,12 +153,16 @@ public class MyTreeSet<A extends Comparable<A>> {
     mytree.add(2);
     mytree.add(7);
     System.out.println("Ausgangsbaum: ");
-    System.out.println(mytree.toString());
+    System.out.print(mytree.toString());
+    System.out.println("Größe: " + mytree.size());
     System.out.println("2 löschen: " + mytree.remove(2));
-    System.out.println(mytree.toString());
+    System.out.print(mytree.toString());
+    System.out.println("Größe: " + mytree.size());
     System.out.println("4 löschen: " + mytree.remove(4));
-    System.out.println(mytree.toString());
+    System.out.print(mytree.toString());
+    System.out.println("Größe: " + mytree.size());
     System.out.println("8 löschen: " + mytree.remove(8));
-    System.out.println(mytree.toString());
+    System.out.print(mytree.toString());
+    System.out.println("Größe: " + mytree.size());
   }
 }
