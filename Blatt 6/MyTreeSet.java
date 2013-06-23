@@ -12,6 +12,21 @@ public class MyTreeSet<A extends Comparable<A>> {
       this.right_child = null;
     }
 
+    private String indentation (int n) {
+      String output = new String(new char[n]).replace('\0', '|'); //char mit Länge n erstellen, in String umwandeln, entstehende 0er mit c ersetzen
+      return output;
+    }
+
+    private String toString(Node n, int level){
+      String result = "";
+      if (n != null) {
+        result += indentation(level) + "- " + n.element + "\n";
+        result += toString(n.left_child, level + 1);
+        result += toString(n.right_child, level + 1);
+      }
+      return result;
+    }
+
     public boolean contains(A a) {
       int comp = a.compareTo(this.element);
       System.out.println(this.element + " " + comp);
@@ -115,7 +130,7 @@ public class MyTreeSet<A extends Comparable<A>> {
 
   public String toString() {
     if (root != null) {
-      return root.toString();
+      return root.toString(root, 0);
     }
     return "";
   }
@@ -135,7 +150,6 @@ public class MyTreeSet<A extends Comparable<A>> {
     mytree.add(3);
     mytree.add(2);
     mytree.add(7);
-    mytree.remove(7);
-    System.out.println(mytree.size());
+    System.out.println(mytree.toString());
   }
 }
