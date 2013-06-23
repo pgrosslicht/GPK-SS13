@@ -123,39 +123,39 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
 
 
   private class MyTreeSetIterator implements Iterator<A> {
-    private Stack<Node> leftPath = new Stack<Node>();
+    private Stack<Node> NodePath = new Stack<Node>();
 
     public MyTreeSetIterator(){
-      pushLeft(MyTreeSet.this.root);
+      pushNode(MyTreeSet.this.root);
     }
 
     @Override
     public boolean hasNext() {
-      return !leftPath.isEmpty();
+      return !NodePath.isEmpty();
     }
 
     @Override
     public A next() throws IndexOutOfBoundsException {
       if (!this.hasNext()) throw new IndexOutOfBoundsException();
 
-      Node current = leftPath.pop();
+      Node current = NodePath.pop();
       A ret = current.element;
-      if(current.right_child != null){
-        pushLeft(current.right_child);
+      if(current.left_child != null){
+        pushNode(current.left_child);
       }
       return ret;
 
     }
 
     /**
-     * pushes the left path of a tree on the leftPath stack
+     * pushes the left path of a tree on the NodePath stack
      * @param start - node where the tree starts
      */
-    private void pushLeft(Node start){
+    private void pushNode(Node start){
       Node current = start;
       while(current != null){
-        leftPath.push(current);
-        current = current.left_child;
+        NodePath.push(current);
+        current = current.right_child;
       }
     }
 
@@ -208,12 +208,13 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
 
   public static void main(String[] args) {
     MyTreeSet<Integer> mytree = new MyTreeSet<Integer>();
+    mytree.add(10);
+    mytree.add(8);
+    mytree.add(20);
     mytree.add(5);
-    mytree.add(4);
-    mytree.add(6);
-    mytree.add(3);
-    mytree.add(2);
-    mytree.add(7);
+    mytree.add(11);
+    mytree.add(30);
+    mytree.add(25);
                   Iterator<Integer> test2 = mytree.iterator();
                   System.out.println(test2.next()); //sollte 5 ausgeben
                   System.out.println(test2.next()); //sollte 5 ausgeben
@@ -223,15 +224,18 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
                   System.out.println(test2.next()); //sollte 5 ausgeben
     System.out.println("Ausgangsbaum: ");
     System.out.print(mytree.toString());
-    System.out.println("Größe: " + mytree.size());
-    System.out.println("2 löschen: " + mytree.remove(2));
+    System.out.println("size: " + mytree.size());
+    System.out.println();
+    System.out.println("2 remove: " + mytree.remove(2));
     System.out.print(mytree.toString());
-    System.out.println("Größe: " + mytree.size());
-    System.out.println("4 löschen: " + mytree.remove(4));
+    System.out.println("size: " + mytree.size());
+    System.out.println();
+    System.out.println("4 remove: " + mytree.remove(4));
     System.out.print(mytree.toString());
-    System.out.println("Größe: " + mytree.size());
-    System.out.println("8 löschen: " + mytree.remove(8));
-    System.out.print(mytree.toString());
-    System.out.println("Größe: " + mytree.size());
+    System.out.println("size: " + mytree.size());
+    System.out.println();
+    System.out.println("8 remove: " + mytree.remove(8));
+    System.out.println(mytree.toString());
+    System.out.println("size: " + mytree.size());
   }
 }
