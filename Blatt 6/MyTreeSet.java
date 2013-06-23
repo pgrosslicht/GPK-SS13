@@ -25,6 +25,55 @@ public class MyTreeSet<A extends Comparable<A>> {
       return false;
     }
 
+    private boolean remove (A a) {
+      Node node = this;
+      Node last = null;
+      do {
+        int comp = a.compareTo(this.element);
+        if (comp < 0) {
+          last = node;
+          node = node.left_child;
+        } else if (comp == 0) {
+          Node substitute;
+          if (node.right_child == null) {
+            substitute = node.left_child;
+          } else {
+            substitute = node.right_child;
+            if (node.left_child != null) {
+              Node right = node.right_child;
+              while (right.left_child != null) {
+                right = right.left_child;
+              }
+              right.left_child = node.left_child;
+            }
+          }
+          if (last == null) {
+            /* return substitute; */
+            return true;
+          } else if (last.left_child == node) {
+            last.left_child = substitute;
+          } else {
+            last.right_child = substitute;
+          }
+          /* return this; */
+          return false;
+        } else {
+          last = node;
+          node = node.right_child;
+        }
+      } while (node != null);
+      /* return this; */
+      return false;
+    }
+
+    private void addTree (Node n) {
+      if (this.left_child != null) {
+        this.left_child.addTree(n);
+      } else {
+        this.left_child = n;
+      }
+    }
+
     public void add(A e) {
       if (e.compareTo(this.element) < 0) {
         if (this.left_child != null) {
@@ -59,6 +108,11 @@ public class MyTreeSet<A extends Comparable<A>> {
     return size;
   }
 
+  public boolean remove(A a) {
+    size--;
+    return root.remove(a);
+  }
+
   public String toString() {
     if (root != null) {
       return root.toString();
@@ -81,6 +135,7 @@ public class MyTreeSet<A extends Comparable<A>> {
     mytree.add(3);
     mytree.add(2);
     mytree.add(7);
+    mytree.remove(7);
     System.out.println(mytree.size());
   }
 }
