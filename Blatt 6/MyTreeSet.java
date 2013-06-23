@@ -81,14 +81,6 @@ public class MyTreeSet<A extends Comparable<A>> {
       return false;
     }
 
-    private void addTree (Node n) {
-      if (this.left_child != null) {
-        this.left_child.addTree(n);
-      } else {
-        this.left_child = n;
-      }
-    }
-
     public void add(A e) {
       if (e.compareTo(this.element) < 0) {
         if (this.left_child != null) {
