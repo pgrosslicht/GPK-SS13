@@ -111,8 +111,8 @@ public class MyTreeSet<A extends Comparable<A>> {
         } */
         int size() {
             int size=0;
-     //        return size;   
-           return this.TreeNode == null ? 0 : 1 + size(TreeNode.left) + size(TreeNode.right);
+             return size;   
+      //     return this.TreeNode == null ? 0 : 1 + size(TreeNode.left) + size(TreeNode.right);
             
         }  
     }
