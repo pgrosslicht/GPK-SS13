@@ -1,5 +1,6 @@
 public class MyTreeSet<A extends Comparable<A>> {
   private Node root;
+  private int size = 0;
   private class Node {
     private A element;
     private Node left_child;
@@ -24,22 +25,18 @@ public class MyTreeSet<A extends Comparable<A>> {
       return false;
     }
 
-
-
     public void add(A e) {
       if (e.compareTo(this.element) < 0) {
         if (this.left_child != null) {
           this.left_child.add(e);
         } else {
           this.left_child = new Node(e);
-      System.out.println("new node left" + this.element);
         }
       } else {
         if (this.right_child != null) {
           this.right_child.add(e);
         } else {
           this.right_child = new Node(e);
-      System.out.println("new node right" + this.element);
         }
       }
     }
@@ -55,6 +52,11 @@ public class MyTreeSet<A extends Comparable<A>> {
     } else {
       root.add(elem);
     }
+    size++;
+  }
+
+  public int size() {
+    return size;
   }
 
   public String toString() {
@@ -79,6 +81,6 @@ public class MyTreeSet<A extends Comparable<A>> {
     mytree.add(3);
     mytree.add(2);
     mytree.add(7);
-    System.out.println(mytree.contains(8));
+    System.out.println(mytree.size());
   }
 }
