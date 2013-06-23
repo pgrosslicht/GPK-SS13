@@ -105,11 +105,16 @@ public class MyTreeSet<A extends Comparable<A>> {
         }
         
         //2.4 int size()
+    /*    int size() {
+            int size=0;
+            return size;   
+        } */
         int size() {
             int size=0;
-            return size;        
-        }
-        
+     //        return size;   
+           return this.TreeNode == null ? 0 : 1 + size(TreeNode.left) + size(TreeNode.right);
+            
+        }  
     }
     
     
@@ -117,16 +122,15 @@ public class MyTreeSet<A extends Comparable<A>> {
         root = null;
     }
     
-    //Hinzufügen von Elementen (Zahlen) zum Testen
-    public void add(A a) {
-        if( root == null ) {
-            root = new TreeNode(a);
-        }
-        else {
-            root.add(a);
-        }
-    }
     
+  public void add(A elem) {
+    if (root == null) {
+      root = new TreeNode(elem);
+      System.out.println("test");
+    } else {
+      root.add(elem);
+    }
+  }
     
     public String toString() {
         if (root != null) {
@@ -135,8 +139,7 @@ public class MyTreeSet<A extends Comparable<A>> {
         return "";
     }
     
-    
-    public static void preorder(TreeNode n)
+    public void preorder(TreeNode n)
     {
         if (n != null)
         {
@@ -156,7 +159,7 @@ public class MyTreeSet<A extends Comparable<A>> {
         testbaum.add(2);
         testbaum.add(4);
         testbaum.add(7);
-        preorder(testnode); //soll ausgeben: 543267
+        /*     preorder(testbaum); //soll ausgeben: 543267
         
         
         TreeNode<Integer> testnode = new TreeNode<Integer>();
@@ -169,6 +172,6 @@ public class MyTreeSet<A extends Comparable<A>> {
         testnode.add(7);
         //    System.out.println(testbaum.toString());
         preorder(testnode); //soll ausgeben: 543267
-        
+        */  
     }
 }
