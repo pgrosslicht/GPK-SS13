@@ -7,10 +7,31 @@ public class MyTreeSet {
         private TreeNode<A> right = null;  // rechter Teilbaum
         
         //Konstruktor für elem
-        TreeNode (A a) {
-            elem = a;
+        TreeNode(A a) {
+            this.elem = a;
+            this.left = null;
+            this.right = null;
         }
-        
+    
+    public void add(A a) {
+      if (a.compareTo(this.elem) < 0) {
+        if (this.left != null) {
+          this.left.add(a);
+        } else {
+          this.left = new TreeNode(a);
+      System.out.println("new node left" + this.elem);
+        }
+      } else {
+        if (this.right != null) {
+          this.right.add(a);
+        } else {
+          this.right = new TreeNode(a);
+      System.out.println("new node right" + this.elem);
+        }
+      }
+    }
+   
+        /*
         //2.1 boolean add(A a)
         //Laufzeit: ???
         boolean add(A a) {
@@ -49,8 +70,7 @@ public class MyTreeSet {
             else if( a == elem ) {
                 if( right == null ) {
                     del = true;
-                }
-                
+                } 
             }
             else if( a > elem ) {
                 if( right != null ) {
@@ -59,7 +79,7 @@ public class MyTreeSet {
             }
             return del;        
         }
-        
+        */
         //2.3 boolean contains(A a)
         //Laufzeit: linear
         boolean contains(A a) {
@@ -77,13 +97,19 @@ public class MyTreeSet {
         
         //2.4 int size()
         int size() {
-            return true;        
+            int size=0;
+            return size;        
         }
-    }
     
+     }
+     
+     
+  public void MyTreeSet() {
+    root = null;
+  }
     
     //Hinzufügen von Elementen (Zahlen) zum Testen
-    public void add(int a) {
+    public void add(A a) {
         if( root == null ) {
             root = new TreeNode(a);
         }
@@ -91,7 +117,6 @@ public class MyTreeSet {
             root.add(a);
         }
     }
-    
     
     
     public String toString() {
@@ -103,7 +128,7 @@ public class MyTreeSet {
     
     //Testprogramm
     public static void main(String[] args) {
-        TreeNode<Integer> testbaum = new TreeNode<Integer>();
+        MyTreeSet<Integer> testbaum = new MyTreeSet<Integer>();
         testbaum.add(5);
         testbaum.add(4);
         testbaum.add(6);
