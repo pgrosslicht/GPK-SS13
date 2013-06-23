@@ -91,13 +91,30 @@ public class MyTreeSet {
             root.add(a);
         }
     }
-   
+    
+    
+    
+    public String toString() {
+        if (root != null) {
+            return root.toString();
+        }
+        return "";
+    }
     
     //Testprogramm
-    public void main(String[] args) {
-        int test = 5;
-        TreeNode testbaum = new TreeNode<Integer>(test);
+    public static void main(String[] args) {
+        TreeNode<Integer> testbaum = new TreeNode<Integer>();
+        testbaum.add(5);
+        testbaum.add(4);
+        testbaum.add(6);
+        testbaum.add(3);
+        testbaum.add(2);
+        testbaum.add(4);
+        testbaum.add(7);
+        System.out.println(testbaum.toString());
         
         
     }
+    
+    
 }
