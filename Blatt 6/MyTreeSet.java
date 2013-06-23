@@ -1,4 +1,6 @@
-public class MyTreeSet<A extends Comparable<A>> {
+import java.util.*;
+
+public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
   private Node root;
   private int size = 0;
   private class Node {
@@ -12,11 +14,22 @@ public class MyTreeSet<A extends Comparable<A>> {
       this.right_child = null;
     }
 
+    /**
+     * Hilfsmethode für toString
+     * @param n wie oft | wiederholt werden soll
+     * @return n-mal |
+     */
     private String indentation (int n) {
       String output = new String(new char[n]).replace('\0', '|'); //char mit Länge n erstellen, in String umwandeln, entstehende 0er mit c ersetzen
       return output;
     }
 
+    /**
+     * formatiert den Baum
+     * @param n Aktueller Node
+     * @param level Aktuelle Tiefe im Baum für Indentation
+     * @return ASCII-Repräsentation des Baums
+     */
     private String toString(Node n, int level){
       String result = "";
       if (n != null) {
@@ -27,6 +40,11 @@ public class MyTreeSet<A extends Comparable<A>> {
       return result;
     }
 
+    /**
+     * überprüft ob sich a im Baum befindet.
+     * @param a Element, das gesucht werden soll
+     * @return true, wenn gefunden, ansonsten false
+     */
     public boolean contains(A a) {
       int comp = a.compareTo(this.element);
       System.out.println(this.element + " " + comp);
@@ -102,6 +120,54 @@ public class MyTreeSet<A extends Comparable<A>> {
     root = null;
   }
 
+
+
+  private class MyTreeSetIterator implements Iterator<A> {
+    private Stack<Node> leftPath = new Stack<Node>();
+
+    public MyTreeSetIterator(){
+      pushLeft(MyTreeSet.this.root);
+    }
+
+    @Override
+    public boolean hasNext() {
+      return !leftPath.isEmpty();
+    }
+
+    @Override
+    public A next() throws IndexOutOfBoundsException {
+      if (!this.hasNext()) throw new IndexOutOfBoundsException();
+
+      Node current = leftPath.pop();
+      A ret = current.element;
+      if(current.right_child != null){
+        pushLeft(current.right_child);
+      }
+      return ret;
+
+    }
+
+    /**
+     * pushes the left path of a tree on the leftPath stack
+     * @param start - node where the tree starts
+     */
+    private void pushLeft(Node start){
+      Node current = start;
+      while(current != null){
+        leftPath.push(current);
+        current = current.left_child;
+      }
+    }
+
+    @Override
+    public void remove() {
+    }
+  }
+
+  public Iterator<A> iterator() {
+    return new MyTreeSetIterator();
+  }
+
   public void add(A elem) {
     if (root == null) {
       root = new Node(elem);
@@ -111,6 +177,10 @@ public class MyTreeSet<A extends Comparable<A>> {
     size++;
   }
 
+  /**
+   * Gibt die aktuelle Größe (Anzahl der Elemente, die nicht null sind) zurück. Laufzeit ist hierbei konstant (O(1)).
+   * @return Größe des Baums
+   */
   public int size() {
     return size;
   }
@@ -144,6 +214,13 @@ public class MyTreeSet<A extends Comparable<A>> {
     mytree.add(3);
     mytree.add(2);
     mytree.add(7);
+                  Iterator<Integer> test2 = mytree.iterator();
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
     System.out.println("Ausgangsbaum: ");
     System.out.print(mytree.toString());
     System.out.println("Größe: " + mytree.size());
