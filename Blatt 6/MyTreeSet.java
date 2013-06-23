@@ -1,12 +1,12 @@
-public class MyTreeSet {
+public class MyTreeSet<A extends Comparable<A>> {
     private TreeNode root = null;
     
-    class TreeNode<A extends Comparable<A>> { // Knoten im Baum
+    class TreeNode { // Knoten im Baum
         private A elem;  //Element
-        private TreeNode<A> left = null;   // linker Teilbaum
-        private TreeNode<A> right = null;  // rechter Teilbaum
+        private TreeNode left = null;   // linker Teilbaum
+        private TreeNode right = null;  // rechter Teilbaum
         
-        //Konstruktor für elem
+        //Konstruktor fÃ¼r elem
         TreeNode(A a) {
             this.elem = a;
             this.left = null;
@@ -55,7 +55,7 @@ public class MyTreeSet {
                 }
             }
             
-            return hinzu; // a nicht größer oder kleiner als elem --> a == elem
+            return hinzu; // a nicht grÃ¶ÃŸer oder kleiner als elem --> a == elem
         }
         
         //2.2 booblean remove(A a)
@@ -108,7 +108,7 @@ public class MyTreeSet {
     root = null;
   }
     
-    //Hinzufügen von Elementen (Zahlen) zum Testen
+    //HinzufÃ¼gen von Elementen (Zahlen) zum Testen
     public void add(A a) {
         if( root == null ) {
             root = new TreeNode(a);
@@ -140,6 +140,4 @@ public class MyTreeSet {
         
         
     }
-    
-    
 }
