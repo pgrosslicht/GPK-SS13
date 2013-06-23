@@ -24,7 +24,7 @@ public class MyTreeSet {
                     hinzu = true;
                 }
             }
-            else {
+            else if( a > elem ) {
                 if ( right != null ) {
                     right.add(e);
                 }
@@ -34,13 +34,30 @@ public class MyTreeSet {
                 }
             }
             
-            return hinzu;
+            return hinzu; // a nicht größer oder kleiner als elem --> a == elem
         }
         
         //2.2 booblean remove(A a)
         //Laufzeit: 
         boolean remove(A a) {
-            return true;        
+            boolean del = false;
+            if( a < elem ) {
+                if( left != null ) {
+                    left = left.remove(a);
+                }
+            }
+            else if( a == elem ) {
+                if( right == null ) {
+                    del = true;
+                }
+                
+            }
+            else if( a > elem ) {
+                if( right != null ) {
+                    right = right.remove(a);   
+                }
+            }
+            return del;        
         }
         
         //2.3 boolean contains(A a)
@@ -62,7 +79,6 @@ public class MyTreeSet {
         int size() {
             return true;        
         }
-        
     }
     
     
