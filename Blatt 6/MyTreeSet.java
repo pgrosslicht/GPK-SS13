@@ -44,7 +44,7 @@ public class MyTreeSet<A extends Comparable<A>> {
       Node node = this;
       Node last = null;
       do {
-        int comp = a.compareTo(this.element);
+        int comp = a.compareTo(node.element);
         if (comp < 0) {
           last = node;
           node = node.left_child;
@@ -71,7 +71,7 @@ public class MyTreeSet<A extends Comparable<A>> {
             last.right_child = substitute;
           }
           /* return this; */
-          return false;
+          return true;
         } else {
           last = node;
           node = node.right_child;
@@ -150,6 +150,13 @@ public class MyTreeSet<A extends Comparable<A>> {
     mytree.add(3);
     mytree.add(2);
     mytree.add(7);
+    System.out.println("Ausgangsbaum: ");
+    System.out.println(mytree.toString());
+    System.out.println("2 löschen: " + mytree.remove(2));
+    System.out.println(mytree.toString());
+    System.out.println("4 löschen: " + mytree.remove(4));
+    System.out.println(mytree.toString());
+    System.out.println("8 löschen: " + mytree.remove(8));
     System.out.println(mytree.toString());
   }
 }
