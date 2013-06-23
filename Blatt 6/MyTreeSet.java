@@ -91,5 +91,13 @@ public class MyTreeSet {
             root.add(a);
         }
     }
+   
     
+    //Testprogramm
+    public void main(String[] args) {
+        int test = 5;
+        TreeNode testbaum = new TreeNode<Integer>(test);
+        
+        
+    }
 }
