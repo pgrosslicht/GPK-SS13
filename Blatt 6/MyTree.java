@@ -1,61 +1,65 @@
 public class MyTree<A extends Comparable<A>> {
-    private Node<A> root = null;
-    public long getitcount = 0;
-    
-    //innere Knotenklasse mit Konstruktor
-    private class Node<K extends Comparable<K>, V> {
-        private K key;
-        private V value;
-        private Node<K,V> left, right;
-        
-        Node(K k, V v) {
-            key = k;
-            value = v;
-            left = null;
-            right = null;
-        }
-        
-        private V get(K k) {
-            getitcount++;
-            if (k.equals(key))
-                return value;
-            if (k.compareTo(key)<0) {
-                if (left == null)
-                    return null;
-                return left.get(k);
-            } else {
-                if (right == null)
-                    return null;
-                return right.get(k);
-            }
-        }
-        
-        //gibt Struktur aus
-        public void print() {
-            if (left != null)
-                left.print();
-            System.out.println(key+": "+value+"\n");
-            if (right != null)
-                right.print();
-        }
-        
-        public String toString() {
-            String l = (left == null) ? "" : left.toString();
-            String r = (right == null) ? "" : right.toString();
-            return l+key+": "+value+"\n"+r;
-        }
+  private Node root;
+  private class Node {
+    private A element;
+    private Node left_child;
+    private Node right_child;
+
+    Node(A e) {
+      this.element = e;
+      this.left_child = null;
+      this.right_child = null;
     }
-    
-    //klasse MyTree (noch nicht generisch!)
-    public MyTree<A> MyTree() {
-        return null;
+
+    public void add(A e) {
+      if (e.compareTo(this.element) < 0) {
+        if (this.left_child != null) {
+          this.left_child.add(e);
+        } else {
+          this.left_child = new Node(e);
+      System.out.println("new node left" + this.element);
+        }
+      } else {
+        if (this.right_child != null) {
+          this.right_child.add(e);
+        } else {
+          this.right_child = new Node(e);
+      System.out.println("new node right" + this.element);
+        }
+      }
     }
-    
-    //toString zum Testen
-    public String toString() {
-        if (head == null)
-            return "";
-        else
-            return head.toString();
+  }
+
+  public void MyTree() {
+    root = null;
+  }
+
+  public void add(A elem) {
+    if (root == null) {
+      root = new Node(elem);
+      System.out.println("test");
+    } else {
+      root.add(elem);
     }
+  }
+
+  public String toString() {
+    if (root != null) {
+      return root.toString();
+    }
+    return "";
+  }
+
+  public static void main(String[] args) {
+    MyTree<Integer> mytree = new MyTree<Integer>();
+    mytree.add(5);
+    mytree.add(4);
+    mytree.add(6);
+    mytree.add(3);
+    mytree.add(2);
+    mytree.add(4);
+    mytree.add(7);
+    System.out.println(mytree.toString());
+  }
 }
+

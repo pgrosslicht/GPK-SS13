@@ -1,177 +1,278 @@
-public class MyTreeSet<A extends Comparable<A>> {
-    private TreeNode root = null;
-    
-    public class TreeNode { // Knoten im Baum
-        private A elem;  //Element
-        private TreeNode left = null;   // linker Teilbaum
-        private TreeNode right = null;  // rechter Teilbaum
-        
-        //Konstruktor für elem
-        TreeNode(A a) {
-            this.elem = a;
-            this.left = null;
-            this.right = null;
-        }
-        
-        public TreeNode getLeft()
-        {
-            return this.left;
-        }
-        public TreeNode getRight()
-        {
-            return this.right;
-        }
-        
-        public void add(A a) {
-            if (a.compareTo(this.elem) < 0) {
-                if (this.left != null) {
-                    this.left.add(a);
-                } else {
-                    this.left = new TreeNode(a);
-                    System.out.println("new node left " + this.elem);
-                }
-            } else {
-                if (this.right != null) {
-                    this.right.add(a);
-                } else {
-                    this.right = new TreeNode(a);
-                    System.out.println("new node right " + this.elem);
-                }
-            }
-        }
-        
-        /*
-        //2.1 boolean add(A a)
-        //Laufzeit: ???
-        boolean add(A a) {
-        boolean hinzu = false;
-        if( a < elem ) {
-        if ( left != null ) {
-        left.add(a);
-        }
-        else {
-        left = new TreeNode(a);////////
-        hinzu = true;
-        }
-        }
-        else if( a > elem ) {
-        if ( right != null ) {
-        right.add(e);
-        }
-        else {
-        right = new TreeNode(a); //////////
-        hinzu = true;
-        }
-        }
-        
-        return hinzu; // a nicht größer oder kleiner als elem --> a == elem
-        }
-        
-        //2.2 booblean remove(A a)
-        //Laufzeit: 
-        boolean remove(A a) {
-        boolean del = false;
-        if( a < elem ) {
-        if( left != null ) {
-        left = left.remove(a);
-        }
-        }
-        else if( a == elem ) {
-        if( right == null ) {
-        del = true;
-        } 
-        }
-        else if( a > elem ) {
-        if( right != null ) {
-        right = right.remove(a);   
-        }
-        }
-        return del;        
-        }
-        */
-        //2.3 boolean contains(A a)
-        //Laufzeit: linear
-        boolean contains(A a) {
-            int c = a.compareTo(elem);
-            if( c < 0 ) {
-                return left != null && left.contains(a);
-            }
-            else if( c == 0) {
-                return true;   
-            }
-            else {
-                return right != null && right.contains(a);   
-            }
-        }
-        
-        //2.4 int size()
-    /*    int size() {
-            int size=0;
-            return size;   
-        } */
-        int size() {
-            int size=0;
-             return size;   
-      //     return this.TreeNode == null ? 0 : 1 + size(TreeNode.left) + size(TreeNode.right);
-            
-        }  
+import java.util.*;
+
+public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
+  private Node root;
+  private int size = 0;
+  private class Node {
+    private A element;
+    private Node left_child;
+    private Node right_child;
+
+    Node(A e) {
+      this.element = e;
+      this.left_child = null;
+      this.right_child = null;
     }
-    
-    
-    public void MyTreeSet() {
-        root = null;
+
+    /**
+     * Hilfsmethode für toString
+     * @param n wie oft | wiederholt werden soll
+     * @return n-mal |
+     */
+    private String indentation (int n) {
+      String output = new String(new char[n]).replace('\0', '|'); //char mit Länge n erstellen, in String umwandeln, entstehende 0er mit c ersetzen
+      return output;
     }
-    
-    
-  public void add(A elem) {
-    if (root == null) {
-      root = new TreeNode(elem);
-      System.out.println("test");
-    } else {
-      root.add(elem);
+
+    /**
+     * formatiert den Baum
+     * @param n Aktueller Node
+     * @param level Aktuelle Tiefe im Baum für Indentation
+     * @return ASCII-Repräsentation des Baums
+     */
+    private String toString(Node n, int level){
+      String result = "";
+      if (n != null) {
+        result += indentation(level) + "- " + n.element + "\n";
+        result += toString(n.left_child, level + 1);
+        result += toString(n.right_child, level + 1);
+      }
+      return result;
+    }
+
+    /**
+     * überprüft ob sich a im Baum befindet.
+     * @param a Element, das gesucht werden soll
+     * @return true, wenn gefunden, ansonsten false
+     */
+    public boolean contains(A a) {
+      int comp = a.compareTo(this.element);
+      System.out.println(this.element + " " + comp);
+      if (comp == 0) {
+        return true;
+      } else if (comp < 0 && this.left_child != null) {
+        return this.left_child.contains(a);
+      } else if (comp > 0 && this.right_child != null){
+        return this.right_child.contains(a);
+      }
+      return false;
+    }
+
+    private boolean remove (A a) {
+      Node node = this;
+      Node last = null;
+      do {
+        int comp = a.compareTo(node.element);
+        if (comp < 0) {
+          last = node;
+          node = node.left_child;
+        } else if (comp == 0) {
+          Node substitute;
+          if (node.right_child == null) {
+            substitute = node.left_child;
+          } else {
+            substitute = node.right_child;
+            if (node.left_child != null) {
+              Node right = node.right_child;
+              while (right.left_child != null) {
+                right = right.left_child;
+              }
+              right.left_child = node.left_child;
+            }
+          }
+          if (last == null) {
+            /* return substitute; */
+            return true;
+          } else if (last.left_child == node) {
+            last.left_child = substitute;
+          } else {
+            last.right_child = substitute;
+          }
+          /* return this; */
+          return true;
+        } else {
+          last = node;
+          node = node.right_child;
+        }
+      } while (node != null);
+      /* return this; */
+      return false;
+    }
+
+    /* rekursive Methode
+     * public boolean add(A e) {
+      if (e.compareTo(this.element) < 0) {
+        if (this.left_child != null) {
+          this.left_child.add(e);
+        } else {
+          this.left_child = new Node(e);
+        }
+      } else {
+        if (this.right_child != null) {
+          this.right_child.add(e);
+        } else {
+          this.right_child = new Node(e);
+        }
+      }
+      return false;
+    }
+    */
+  
+    public boolean add (A e) {
+      Node node = this;
+      while (true) {
+        int comp = e.compareTo(node.element);
+        if (comp == 0) {
+          return false;
+        } else if (comp < 0) {
+          if (node.left_child != null) {
+            node = node.left_child;
+          } else {
+            node.left_child = new Node(e);
+            return true;
+          }
+        } else {
+          if (node.right_child != null) {
+            node = node.right_child;
+          } else {
+            node.right_child = new Node(e);
+            return true;
+          }
+        }
+      }
+    }
+
+  }
+
+  public void MyTree() {
+    root = null;
+  }
+
+
+
+  private class MyTreeSetIterator implements Iterator<A> {
+    private Stack<Node> NodePath = new Stack<Node>();
+
+    public MyTreeSetIterator(){
+      pushNode(MyTreeSet.this.root);
+    }
+
+    @Override
+    public boolean hasNext() {
+      return !NodePath.isEmpty();
+    }
+
+    @Override
+    public A next() throws IndexOutOfBoundsException {
+      if (!this.hasNext()) throw new IndexOutOfBoundsException();
+
+      Node current = NodePath.pop();
+      A ret = current.element;
+      if(current.left_child != null){
+        pushNode(current.left_child);
+      }
+      return ret;
+
+    }
+
+    /**
+     * pushes the left path of a tree on the NodePath stack
+     * @param start - node where the tree starts
+     */
+    private void pushNode(Node start){
+      Node current = start;
+      while(current != null){
+        NodePath.push(current);
+        current = current.right_child;
+      }
+    }
+
+    @Override
+    public void remove() {
     }
   }
-    
-    public String toString() {
-        if (root != null) {
-            return root.toString();
-        }
-        return "";
+
+  public Iterator<A> iterator() {
+    return new MyTreeSetIterator();
+  }
+
+  public boolean add(A elem) {
+    if (root == null) {
+      root = new Node(elem);
+      size++;
+      return true;
+    } else {
+      boolean add = root.add(elem);
+      if (add) 
+        size++; 
+      return add;
     }
-    
-    public void preorder(TreeNode n)
-    {
-        if (n != null)
-        {
-            System.out.print(n.elem + " ");
-            preorder(n.getLeft());
-            preorder(n.getRight());
-        }
+  }
+
+  /**
+   * Gibt die aktuelle Größe (Anzahl der Elemente, die nicht null sind) zurück. Laufzeit ist hierbei konstant (O(1)).
+   * @return Größe des Baums
+   */
+  public int size() {
+    return size;
+  }
+
+  public boolean remove(A a) {
+    boolean remove = root.remove(a);
+    if (remove)
+      size--;
+    return remove;
+  }
+
+  public String toString() {
+    if (root != null) {
+      return root.toString(root, 0);
     }
-    
-    //Testprogramm
-    public static void main(String[] args) {
-        MyTreeSet<Integer> testbaum = new MyTreeSet<Integer>();
-        testbaum.add(5);
-        testbaum.add(4);
-        testbaum.add(6);
-        testbaum.add(3);
-        testbaum.add(2);
-        testbaum.add(4);
-        testbaum.add(7);
-        /*     preorder(testbaum); //soll ausgeben: 543267
-        
-        
-        TreeNode<Integer> testnode = new TreeNode<Integer>();
-        testnode.add(5);
-        testnode.add(4);
-        testnode.add(6);
-        testnode.add(3);
-        testnode.add(2);
-        testnode.add(4);
-        testnode.add(7);
-        //    System.out.println(testbaum.toString());
-        preorder(testnode); //soll ausgeben: 543267
-        */  
+    return "";
+  }
+
+  public boolean contains(A a) {
+    if (root != null) {
+      return root.contains(a);
     }
+    return false;
+  }
+
+  public static void main(String[] args) {
+    MyTreeSet<Integer> mytree = new MyTreeSet<Integer>();
+    mytree.add(10);
+    mytree.add(8);
+    mytree.add(20);
+    mytree.add(5);
+    mytree.add(11);
+    mytree.add(30);
+    System.out.println("size: " + mytree.size());
+    System.out.println("25 hinzufügen: " + mytree.add(25));
+    System.out.println("size: " + mytree.size());
+    System.out.println("25 hinzufügen: " + mytree.add(25));
+    System.out.println("size: " + mytree.size());
+                  Iterator<Integer> test2 = mytree.iterator();
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+                  System.out.println(test2.next()); //sollte 5 ausgeben
+    System.out.println("Ausgangsbaum: ");
+    System.out.print(mytree.toString());
+    System.out.println("size: " + mytree.size());
+    System.out.println();
+    System.out.println("2 remove: " + mytree.remove(2));
+    System.out.print(mytree.toString());
+    System.out.println("size: " + mytree.size());
+    System.out.println();
+    System.out.println("4 remove: " + mytree.remove(4));
+    System.out.print(mytree.toString());
+    System.out.println("size: " + mytree.size());
+    System.out.println();
+    System.out.println("8 remove: " + mytree.remove(8));
+    System.out.println(mytree.toString());
+    System.out.println("size: " + mytree.size());
+  }
 }
+
