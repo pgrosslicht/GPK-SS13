@@ -99,7 +99,8 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
       return false;
     }
 
-    public void add(A e) {
+    /* rekursive Methode
+     * public boolean add(A e) {
       if (e.compareTo(this.element) < 0) {
         if (this.left_child != null) {
           this.left_child.add(e);
@@ -113,7 +114,34 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
           this.right_child = new Node(e);
         }
       }
+      return false;
     }
+    */
+  
+    public boolean add (A e) {
+      Node node = this;
+      while (true) {
+        int comp = e.compareTo(node.element);
+        if (comp == 0) {
+          return false;
+        } else if (comp < 0) {
+          if (node.left_child != null) {
+            node = node.left_child;
+          } else {
+            node.left_child = new Node(e);
+            return true;
+          }
+        } else {
+          if (node.right_child != null) {
+            node = node.right_child;
+          } else {
+            node.right_child = new Node(e);
+            return true;
+          }
+        }
+      }
+    }
+
   }
 
   public void MyTree() {
@@ -168,13 +196,17 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
     return new MyTreeSetIterator();
   }
 
-  public void add(A elem) {
+  public boolean add(A elem) {
     if (root == null) {
       root = new Node(elem);
+      size++;
+      return true;
     } else {
-      root.add(elem);
+      boolean add = root.add(elem);
+      if (add) 
+        size++; 
+      return add;
     }
-    size++;
   }
 
   /**
@@ -214,7 +246,11 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
     mytree.add(5);
     mytree.add(11);
     mytree.add(30);
-    mytree.add(25);
+    System.out.println("size: " + mytree.size());
+    System.out.println("25 hinzufügen: " + mytree.add(25));
+    System.out.println("size: " + mytree.size());
+    System.out.println("25 hinzufügen: " + mytree.add(25));
+    System.out.println("size: " + mytree.size());
                   Iterator<Integer> test2 = mytree.iterator();
                   System.out.println(test2.next()); //sollte 5 ausgeben
                   System.out.println(test2.next()); //sollte 5 ausgeben
