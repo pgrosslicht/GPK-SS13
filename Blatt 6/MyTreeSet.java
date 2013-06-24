@@ -47,7 +47,6 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
      */
     public boolean contains(A a) {
       int comp = a.compareTo(this.element);
-      System.out.println(this.element + " " + comp);
       if (comp == 0) {
         return true;
       } else if (comp < 0 && this.left_child != null) {
@@ -81,14 +80,12 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
             }
           }
           if (last == null) {
-            /* return substitute; */
             return true;
           } else if (last.left_child == node) {
             last.left_child = substitute;
           } else {
             last.right_child = substitute;
           }
-          /* return this; */
           return true;
         } else {
           last = node;
