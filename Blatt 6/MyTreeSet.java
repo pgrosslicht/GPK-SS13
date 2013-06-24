@@ -42,6 +42,7 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
 
     /**
      * überprüft ob sich a im Baum befindet.
+     * Laufzeit: Best-Case: O(1) (erstes Element), Average-Case: O(log(n)), Worst-Case: O(n) (entartete Liste)
      * @param a Element, das gesucht werden soll
      * @return true, wenn gefunden, ansonsten false
      */
@@ -160,9 +161,7 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
     }
 
     @Override
-    public A next() throws IndexOutOfBoundsException {
-      if (!this.hasNext()) throw new IndexOutOfBoundsException();
-
+    public A next() {
       Node current = NodePath.pop();
       A ret = current.element;
       if(current.left_child != null){
@@ -173,7 +172,7 @@ public class MyTreeSet<A extends Comparable<A>> implements Iterable<A> {
     }
 
     /**
-     * pushes the left path of a tree on the NodePath stack
+     * pushes the right path of a tree on the NodePath stack
      * @param start - node where the tree starts
      */
     private void pushNode(Node start){
