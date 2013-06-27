@@ -1,7 +1,7 @@
 public class Bubble { 
 	static void sort(String[] array) {
 		boolean unsortiert=true;
-		String[] temp;
+		String temp;
 		
 		while (unsortiert){
 			unsortiert = false;
