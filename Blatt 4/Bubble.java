@@ -5,14 +5,23 @@ public class Bubble {
 		
 		while (unsortiert){
 			unsortiert = false;
-			for (int i=0; i < array.length-1; i++) 
-			if (array[i].compareTo(array[i+1]) > 0 ) {                      
-				temp       = array[i];
-				array[i]       = array[i+1];
-				array[i+1]     = temp;
-				unsortiert = true;
-			}          
-		} 
+			for (int i=0; i < array.length-1; i++) {
+			    if (array[i].compareTo(array[i+1]) > 0 ) {                      
+			        temp       = array[i];
+			        array[i]       = array[i+1];
+			        array[i+1]     = temp;
+			        unsortiert = true;
+			    }
+			} 
+			for (int i=array.length-1; i > 0; i--) {
+			    if (array[i].compareTo(array[i-1]) < 0 ) {                      
+			        temp       = array[i];
+			        array[i]       = array[i-1];
+			        array[i-1]     = temp;
+			        unsortiert = true;
+			    }
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -22,9 +31,9 @@ public class Bubble {
 		for (int i=0; i<liste.length; i++) 
 			System.out.print(liste[i]+" ");  
 		System.out.println("\nBest case: ");
-		String[] liste2 = {"a","b","c","d","e","f","g"};
+		String[] liste2 = {"a","b","c","d","e","f","g","h", "a"};
 		sort(liste2);
-		for (int i=0; i<liste.length; i++) 
-			System.out.print(liste[i]+" ");      
+		for (int i=0; i<liste2.length; i++) 
+			System.out.print(liste2[i]+" ");      
 	} 
 }
